@@ -5,6 +5,11 @@
     .p2(:style='p2Style')
     .p3(:style='p3Style')
     .p4(:style='p4Style')
+    svg
+      path(:style='lineStyle')
+      path(:style='p1_lineStyle')
+      path(:style='p2_lineStyle')
+      path(:style='cubicStyle')
 </template>
 
 <script>
@@ -47,17 +52,44 @@ export default {
     },
     p3Style () {
       return {
-        top: '190px',
-        left: '-105px'
+        top: '0px',
+        left: '200px'
       }
     },
     p4Style () {
       return {
-        top: '-105px',
-        left: '190px'
+        top: '200px',
+        left: '0px'
       }
-
-    }
+    },
+    p1_lineStyle () {
+      return {
+        stroke: 'black',
+        fill: 'none',
+        d: `path('M 0,200 L ${this.position.p1_x}  ${this.position.p1_y}')`
+      }
+    },
+    lineStyle () {
+      return {
+        stroke: 'black',
+        fill: 'none',
+        d: "path('M 0,200 L 200, 0')"
+      }
+    },
+    p2_lineStyle () {
+      return {
+        stroke: 'black',
+        fill: 'none',
+        d: `path('M 200 0 L ${this.position.p2_x} ${this.position.p2_y}')`
+      }
+    },
+    cubicStyle () {
+      return {
+        stroke: 'black',
+        fill: 'none',
+        d: `path('M 200, 0 C ${this.position.p2_x} ${this.position.p2_y}, ${this.position.p1_x} ${this.position.p1_y}, 0 200 ')`
+      }
+    }  
   },
   mounted () {
     $('.cubic-bezier > .control-area > .p1').draggable({
@@ -103,9 +135,13 @@ export default {
   align-contetn center
   justify-content center
   .control-area
-    width 100px
-    height 100px
+    width 200px
+    height 200px
     position relative
+    background-color #a5b5ce
+    svg
+      width 300px
+      height 300px
     .p1,.p2
       position absolute
       width 16px
@@ -113,6 +149,8 @@ export default {
       background #A623B8
       border-radius 50%
       cursor move
+      margin-top -8px
+      margin-left -8px
       box-shadow 0 0 0 0 rgba(166, 35, 184, 0.0)
       transition box-shadow 0.2s cubic-bezier(0.4, 0.4, 0, 1)
       &:hover
@@ -124,6 +162,8 @@ export default {
       background #56365b
       border-radius 50%
       cursor move
+      margin-top -8px
+      margin-left -8px
       box-shadow 0 0 0 0 rgba(166, 35, 184, 0.0)
       transition box-shadow 0.2s cubic-bezier(0.4, 0.4, 0, 1)
       &:hover
