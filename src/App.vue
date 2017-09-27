@@ -29,7 +29,7 @@ export default {
   data () {
     return {
       hint: '20,20',
-      cubicBezier: 'cubic-bezier(0,100,200,100)'
+      cubicBezier: 'cubic-bezier(0,200,200,300)'
     }
   },
   methods: {

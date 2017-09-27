@@ -52,13 +52,13 @@ export default {
     },
     p3Style () {
       return {
-        top: '0px',
+        top: '150px',
         left: '200px'
       }
     },
     p4Style () {
       return {
-        top: '200px',
+        top: '350px',
         left: '0px'
       }
     },
@@ -66,33 +66,35 @@ export default {
       return {
         stroke: 'black',
         fill: 'none',
-        d: `path('M 0,200 L ${this.position.p1_x}  ${this.position.p1_y}')`
+        d: `path('M 0,350 L ${this.position.p1_x}  ${this.position.p1_y}')`
       }
     },
     lineStyle () {
       return {
         stroke: 'black',
-        fill: 'none',
-        d: "path('M 0,200 L 200, 0')"
+        fill: 'rgba(124,240,10,0.5)',
+        d: "path('M 0,350 L 350, 0')"
       }
     },
     p2_lineStyle () {
       return {
         stroke: 'black',
         fill: 'none',
-        d: `path('M 200 0 L ${this.position.p2_x} ${this.position.p2_y}')`
+        d: `path('M 200 150 L ${this.position.p2_x} ${this.position.p2_y}')`
       }
     },
     cubicStyle () {
       return {
-        stroke: 'black',
+        strokeWidth: '5px',
+        stroke: 'purple',
         fill: 'none',
-        d: `path('M 200, 0 C ${this.position.p2_x} ${this.position.p2_y}, ${this.position.p1_x} ${this.position.p1_y}, 0 200 ')`
+        d: `path('M 200, 150 C ${this.position.p2_x} ${this.position.p2_y}, ${this.position.p1_x} ${this.position.p1_y}, 0 350 ')`
       }
     }  
   },
   mounted () {
     $('.cubic-bezier > .control-area > .p1').draggable({
+      containment: 'parent',
       start: () => {
       },
       drag: (e, ui) => {
@@ -107,6 +109,7 @@ export default {
       }
     }),
     $('.cubic-bezier > .control-area > .p2').draggable({
+      containment: 'parent',
       start: () => {
       },
       drag: (e, ui) => {
@@ -136,12 +139,11 @@ export default {
   justify-content center
   .control-area
     width 200px
-    height 200px
+    height 500px
     position relative
-    background-color #a5b5ce
     svg
-      width 300px
-      height 300px
+      width 100%
+      height 100%
     .p1,.p2
       position absolute
       width 16px
@@ -150,7 +152,7 @@ export default {
       border-radius 50%
       cursor move
       margin-top -8px
-      margin-left -8px
+      margin-left -8px 
       box-shadow 0 0 0 0 rgba(166, 35, 184, 0.0)
       transition box-shadow 0.2s cubic-bezier(0.4, 0.4, 0, 1)
       &:hover
