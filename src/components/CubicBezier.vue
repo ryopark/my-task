@@ -28,19 +28,19 @@ export default {
         const array = cubicBezier.slice(start, end).split(',')
         return {
           p1_x: parseInt(array[0]),
-          p1_y: parseInt(array[1]),
+          p1_y: 350-parseInt(array[1]),
           p2_x: parseInt(array[2]),
-          p2_y: parseInt(array[3])
+          p2_y: 350-parseInt(array[3])
         }
       },
       set (val) {
-        this.$emit('update', `cubic-bezier(${val.p1_x},${val.p1_y},${val.p2_x},${val.p2_y})`)
+        this.$emit('update', `cubic-bezier(${val.p1_x},${350-val.p1_y},${val.p2_x},${350-val.p2_y})`)
       }
 
     },
     p1Style () {
       return {
-        top: `${ this.position.p1_y}px`,
+        top: `${this.position.p1_y}px`,
         left: `${this.position.p1_x}px`
       }
     },

@@ -44,6 +44,8 @@ export default {
       stop: () => {
       }
     })
+
+    
   }
 }
 </script>
@@ -69,6 +71,8 @@ export default {
       position absolute
       width 16px
       height 16px
+      margin-left -8px
+      margin-top -8px
       background #A623B8
       border-radius 50%
       cursor move
