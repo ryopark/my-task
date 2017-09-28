@@ -28,13 +28,13 @@ export default {
         const array = cubicBezier.slice(start, end).split(',')
         return {
           p1_x: parseInt(array[0]),
-          p1_y: 350-parseInt(array[1]),
+          p1_y: 350 - parseInt(array[1]),
           p2_x: parseInt(array[2]),
-          p2_y: 350-parseInt(array[3])
+          p2_y: 350 - parseInt(array[3])
         }
       },
       set (val) {
-        this.$emit('update', `cubic-bezier(${val.p1_x},${350-val.p1_y},${val.p2_x},${350-val.p2_y})`)
+        this.$emit('update', `cubic-bezier(${val.p1_x},${350 - val.p1_y},${val.p2_x},${350 - val.p2_y})`)
       }
 
     },
@@ -136,8 +136,8 @@ export default {
       left 0px
     .p3,.p4
       position absolute
-      width 15px
-      height 15px
+      width 16px
+      height 16px
       background #1a1a1a
       border-radius 50%
       margin-top -8px
