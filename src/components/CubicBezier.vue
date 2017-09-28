@@ -3,13 +3,13 @@
   .control-area
     .p1(:style='p1Style')
     .p2(:style='p2Style')
-    .p3(:style='p3Style')
-    .p4(:style='p4Style')
+    .p3
+    .p4
     svg
-      path(:style='lineStyle')
-      path(:style='p1_lineStyle')
-      path(:style='p2_lineStyle')
-      path(:style='cubicStyle')
+      path.line
+      path.toP1(:style='toP1Style')
+      path.toP2(:style='toP2Style')
+      path.cubicPath(:style='cubicStyle')
 </template>
 
 <script>
@@ -40,7 +40,7 @@ export default {
     },
     p1Style () {
       return {
-        top: `${this.position.p1_y}px`,
+        top: `${ this.position.p1_y}px`,
         left: `${this.position.p1_x}px`
       }
     },
@@ -50,44 +50,18 @@ export default {
         left: `${this.position.p2_x}px`
       }
     },
-    p3Style () {
+    toP1Style () {
       return {
-        top: '150px',
-        left: '200px'
-      }
-    },
-    p4Style () {
-      return {
-        top: '350px',
-        left: '0px'
-      }
-    },
-    p1_lineStyle () {
-      return {
-        stroke: 'black',
-        fill: 'none',
         d: `path('M 0,350 L ${this.position.p1_x}  ${this.position.p1_y}')`
       }
     },
-    lineStyle () {
+    toP2Style () {
       return {
-        stroke: 'black',
-        fill: 'rgba(124,240,10,0.5)',
-        d: "path('M 0,350 L 350, 0')"
-      }
-    },
-    p2_lineStyle () {
-      return {
-        stroke: 'black',
-        fill: 'none',
         d: `path('M 200 150 L ${this.position.p2_x} ${this.position.p2_y}')`
       }
     },
     cubicStyle () {
       return {
-        strokeWidth: '5px',
-        stroke: 'purple',
-        fill: 'none',
         d: `path('M 200, 150 C ${this.position.p2_x} ${this.position.p2_y}, ${this.position.p1_x} ${this.position.p1_y}, 0 350 ')`
       }
     }  
@@ -141,9 +115,6 @@ export default {
     width 200px
     height 500px
     position relative
-    svg
-      width 100%
-      height 100%
     .p1,.p2
       position absolute
       width 16px
@@ -157,18 +128,40 @@ export default {
       transition box-shadow 0.2s cubic-bezier(0.4, 0.4, 0, 1)
       &:hover
         box-shadow 0 0 0 4px rgba(166, 35, 184, 0.2)
+    .p3
+      top 150px
+      left 200px
+    .p4
+      top 350px
+      left 0px
     .p3,.p4
       position absolute
-      width 16px
-      height 16px
-      background #56365b
+      width 15px
+      height 15px
+      background #1a1a1a
       border-radius 50%
-      cursor move
       margin-top -8px
       margin-left -8px
-      box-shadow 0 0 0 0 rgba(166, 35, 184, 0.0)
-      transition box-shadow 0.2s cubic-bezier(0.4, 0.4, 0, 1)
-      &:hover
-        box-shadow 0 0 0 4px rgba(166, 35, 184, 0.2)
-    
+      opacity 0.9
+    svg
+      width 100%
+      height 100%
+      .line
+        stroke #d9d9d9
+        stroke-width 2px
+        fill: rgba(124,240,10,0.5)
+        d: path('M 0,350 L 350, 0')
+        opacity: 0.8
+      .toP1,.toP2
+        stroke-width 2px
+        stroke #A623B8
+        fill none
+      .cubicPath
+        stroke-width 5px
+        stroke black
+        fill none
+
+
+
+
 </style>

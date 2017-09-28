@@ -28,8 +28,8 @@ export default {
   },
   data () {
     return {
-      hint: '20,20',
-      cubicBezier: 'cubic-bezier(0,200,200,300)'
+      hint: '0,0',
+      cubicBezier: 'cubic-bezier(10,250,190,300)'
     }
   },
   methods: {
