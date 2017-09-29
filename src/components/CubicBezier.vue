@@ -119,7 +119,6 @@ export default {
     .p2
       margin-top -8px
       margin-left -11px 
-
     .p1,.p2
       position absolute
       width 16px
@@ -131,21 +130,6 @@ export default {
       transition box-shadow 0.2s cubic-bezier(0.4, 0.4, 0, 1)
       &:hover
         box-shadow 0 0 0 4px rgba(166, 35, 184, 0.2)
-    .p3
-      top 150px
-      left 200px
-    .p4
-      top 350px
-      left 0px
-    .p3,.p4
-      position absolute
-      width 16px
-      height 16px
-      background #1a1a1a
-      border-radius 50%
-      margin-top -8px
-      margin-left -6px
-      opacity 0.8
     svg
       width 100%
       height 100%
