@@ -25,14 +25,14 @@ export default {
         const end =  cubicBezier.indexOf(')') 
         const array = cubicBezier.slice(start, end).split(',')
         return {
-          p1_x: parseInt(array[0]),
-          p1_y: 350 - parseInt(array[1]),
-          p2_x: parseInt(array[2]),
-          p2_y: 350 - parseInt(array[3])
+          p1_x: parseFloat(array[0])*200,
+          p1_y: (400 - parseFloat(array[1])*200),
+          p2_x: parseFloat(array[2])*200,
+          p2_y: (400 - parseFloat(array[3])*200)
         }
       },
       set (val) {
-        this.$emit('update', `cubic-bezier(${val.p1_x},${350 - val.p1_y},${val.p2_x},${350 - val.p2_y})`)
+        this.$emit('update', `cubic-bezier(${val.p1_x/200},${(400 - val.p1_y)/200},${val.p2_x/200},${(400 - val.p2_y)/200})`)
       }
 
     },
@@ -50,17 +50,17 @@ export default {
     },
     toP1Style () {
       return {
-        d: `path('M 5,350 L ${this.position.p1_x}  ${this.position.p1_y}')`
+        d: `path('M 0,400 L ${this.position.p1_x}  ${this.position.p1_y}')`
       }
     },
     toP2Style () {
       return {
-        d: `path('M 195 150 L ${this.position.p2_x} ${this.position.p2_y}')`
+        d: `path('M 200 200 L ${this.position.p2_x} ${this.position.p2_y}')`
       }
     },
     cubicStyle () {
       return {
-        d: `path('M 195, 150 C ${this.position.p2_x} ${this.position.p2_y}, ${this.position.p1_x} ${this.position.p1_y}, 5 350 ')`
+        d: `path('M 200, 200 C ${this.position.p2_x} ${this.position.p2_y}, ${this.position.p1_x} ${this.position.p1_y}, 0 400 ')`
       }
     }  
   },
@@ -111,20 +111,16 @@ export default {
   justify-content center
   .control-area
     width 200px
-    height 500px
+    height 600px
     position relative
-    .p1 
-      margin-top -8px
-      margin-left -5px 
-    .p2
-      margin-top -8px
-      margin-left -11px 
     .p1,.p2
       position absolute
       width 16px
       height 16px
       background #A623B8
       border-radius 50%
+      margin-top -8px
+      margin-left -8px 
       cursor move
       box-shadow 0 0 0 0 rgba(166, 35, 184, 0.0)
       transition box-shadow 0.2s cubic-bezier(0.4, 0.4, 0, 1)
@@ -137,7 +133,7 @@ export default {
         stroke #000000
         stroke-width 2px
         fill: rgba(124,240,10,0.5)
-        d: path('M 5,350 L 195, 150')
+        d: path('M 0,400 L 200, 200')
         stroke-opacity: 0.104761096
         stroke-linecap round
         stroke-linejoin round
@@ -146,9 +142,11 @@ export default {
         stroke #A623B8
         fill none
         stroke-linecap round
+        stroke-linejoin round
       .cubicPath
         stroke-width 4px
         stroke-linecap round
+        stroke-linejoin round
         stroke #000000
         fill none
 
