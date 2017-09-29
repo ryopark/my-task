@@ -3,13 +3,11 @@
   .control-area
     .p1(:style='p1Style')
     .p2(:style='p2Style')
-    .p3
-    .p4
     svg
       path.line
+      path.cubicPath(:style='cubicStyle')
       path.toP1(:style='toP1Style')
       path.toP2(:style='toP2Style')
-      path.cubicPath(:style='cubicStyle')
 </template>
 
 <script>
@@ -52,17 +50,17 @@ export default {
     },
     toP1Style () {
       return {
-        d: `path('M 0,350 L ${this.position.p1_x}  ${this.position.p1_y}')`
+        d: `path('M 5,350 L ${this.position.p1_x}  ${this.position.p1_y}')`
       }
     },
     toP2Style () {
       return {
-        d: `path('M 200 150 L ${this.position.p2_x} ${this.position.p2_y}')`
+        d: `path('M 195 150 L ${this.position.p2_x} ${this.position.p2_y}')`
       }
     },
     cubicStyle () {
       return {
-        d: `path('M 200, 150 C ${this.position.p2_x} ${this.position.p2_y}, ${this.position.p1_x} ${this.position.p1_y}, 0 350 ')`
+        d: `path('M 195, 150 C ${this.position.p2_x} ${this.position.p2_y}, ${this.position.p1_x} ${this.position.p1_y}, 5 350 ')`
       }
     }  
   },
@@ -115,6 +113,13 @@ export default {
     width 200px
     height 500px
     position relative
+    .p1 
+      margin-top -8px
+      margin-left -5px 
+    .p2
+      margin-top -8px
+      margin-left -11px 
+
     .p1,.p2
       position absolute
       width 16px
@@ -122,8 +127,6 @@ export default {
       background #A623B8
       border-radius 50%
       cursor move
-      margin-top -8px
-      margin-left -8px 
       box-shadow 0 0 0 0 rgba(166, 35, 184, 0.0)
       transition box-shadow 0.2s cubic-bezier(0.4, 0.4, 0, 1)
       &:hover
@@ -141,24 +144,28 @@ export default {
       background #1a1a1a
       border-radius 50%
       margin-top -8px
-      margin-left -8px
-      opacity 0.9
+      margin-left -6px
+      opacity 0.8
     svg
       width 100%
       height 100%
       .line
-        stroke #d9d9d9
+        stroke #000000
         stroke-width 2px
         fill: rgba(124,240,10,0.5)
-        d: path('M 0,350 L 350, 0')
-        opacity: 0.8
+        d: path('M 5,350 L 195, 150')
+        stroke-opacity: 0.104761096
+        stroke-linecap round
+        stroke-linejoin round
       .toP1,.toP2
         stroke-width 2px
         stroke #A623B8
         fill none
+        stroke-linecap round
       .cubicPath
-        stroke-width 5px
-        stroke black
+        stroke-width 4px
+        stroke-linecap round
+        stroke #000000
         fill none
 
 

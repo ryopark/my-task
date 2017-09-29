@@ -1,7 +1,7 @@
 <template lang='pug'>
 .hint
-  .control-area
-    .knob(:style='knobStyle')
+  img(src='../assets/cubic-bezier.svg')
+
 </template>
 
 <script>
