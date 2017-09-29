@@ -3,7 +3,7 @@
   .control-area
     .p1(:style='p1Style')
     .p2(:style='p2Style')
-    svg
+    svg(viewBox='0 0 200 600')
       path.line
       path.cubicPath(:style='cubicStyle')
       path.toP1(:style='toP1Style')
@@ -110,7 +110,7 @@ export default {
   align-contetn center
   justify-content center
   .control-area
-    width 200px
+    width 210px
     height 600px
     position relative
     .p1,.p2
@@ -120,15 +120,15 @@ export default {
       background #A623B8
       border-radius 50%
       margin-top -8px
-      margin-left -8px 
+      margin-left -3px 
       cursor move
       box-shadow 0 0 0 0 rgba(166, 35, 184, 0.0)
       transition box-shadow 0.2s cubic-bezier(0.4, 0.4, 0, 1)
       &:hover
         box-shadow 0 0 0 4px rgba(166, 35, 184, 0.2)
     svg
-      width 100%
-      height 100%
+      width 210px
+      height 600px
       .line
         stroke #000000
         stroke-width 2px
