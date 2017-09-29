@@ -32,7 +32,7 @@ export default {
         }
       },
       set (val) {
-        this.$emit('update', `cubic-bezier(${val.p1_x/200},${(400 - val.p1_y)/200},${val.p2_x/200},${(400 - val.p2_y)/200})`)
+        this.$emit('update', `cubic-bezier(${Math.round(val.p1_x/2)/100}, ${Math.round((400 - val.p1_y)/2)/100}, ${Math.round(val.p2_x/2)/100}, ${Math.round((400 - val.p2_y)/2)/100})`)
       }
 
     },
