@@ -18,81 +18,86 @@ export default {
   name: 'CubicBezier',
   props: ['cubicBezier'],
   computed: {
-    position: {
+    points: {
       get () {
-        const cubicBezier = String(this.cubicBezier)
-        const start = cubicBezier.indexOf('(') + 1
-        const end =  cubicBezier.indexOf(')') 
-        const array = cubicBezier.slice(start, end).split(',')
+        const string = this.cubicBezier.match(/cubic-bezier\((.*)\)/)[1]
+        return string.split(',').map(v => Number(v))
+      },
+      set (val) {
+        this.$emit('update', `cubic-bezier(${val[0]}, ${val[1]}, ${val[2]}, ${val[3]})`)
+      }
+    },
+    p1: {
+      get () {
         return {
-          p1_x: parseFloat(array[0])*200,
-          p1_y: (400 - parseFloat(array[1])*200),
-          p2_x: parseFloat(array[2])*200,
-          p2_y: (400 - parseFloat(array[3])*200)
+          x: this.points[0] * 200,
+          y: 400 - (this.points[1] * 200)
         }
       },
       set (val) {
-        this.$emit('update', `cubic-bezier(${Math.round(val.p1_x/2)/100}, ${Math.round((400 - val.p1_y)/2)/100}, ${Math.round(val.p2_x/2)/100}, ${Math.round((400 - val.p2_y)/2)/100})`)
+        this.points[0] = Math.round(val.x / 2) / 100
+        this.points[1] = Math.round((400 - val.y) / 2) / 100
+        this.points = this.points
       }
-
+    },
+    p2: {
+      get () {
+        return {
+          x: this.points[2] * 200,
+          y: 400 - (this.points[3] * 200)
+        }
+      },
+      set (val) {
+        this.points[2] = Math.round(val.x / 2) / 100
+        this.points[3] = Math.round((400 - val.y) / 2) / 100
+        this.points = this.points
+      }
     },
     p1Style () {
       return {
-        top: `${this.position.p1_y}px`,
-        left: `${this.position.p1_x}px`
+        top: `${this.p1.y}px`,
+        left: `${this.p1.x}px`
       }
     },
     p2Style () {
       return {
-        top: `${this.position.p2_y}px`,
-        left: `${this.position.p2_x}px`
+        top: `${this.p2.y}px`,
+        left: `${this.p2.x}px`
       }
     },
     toP1Style () {
       return {
-        d: `path('M 0,400 L ${this.position.p1_x}  ${this.position.p1_y}')`
+        d: `path('M 0,400 L ${this.p1.x}  ${this.p1.y}')`
       }
     },
     toP2Style () {
       return {
-        d: `path('M 200 200 L ${this.position.p2_x} ${this.position.p2_y}')`
+        d: `path('M 200 200 L ${this.p2.x} ${this.p2.y}')`
       }
     },
     cubicStyle () {
       return {
-        d: `path('M 200, 200 C ${this.position.p2_x} ${this.position.p2_y}, ${this.position.p1_x} ${this.position.p1_y}, 0 400 ')`
+        d: `path('M 200, 200 C ${this.p2.x} ${this.p2.y}, ${this.p1.x} ${this.p1.y}, 0 400 ')`
       }
-    }  
+    }
   },
   mounted () {
     $('.cubic-bezier > .control-area > .p1').draggable({
       containment: 'parent',
-      start: () => {
-      },
       drag: (e, ui) => {
-        this.position = {
-          p1_x: ui.position.left,
-          p1_y: ui.position.top,
-          p2_x: this.position.p2_x,
-          p2_y: this.position.p2_y,
+        this.p1 = {
+          x: ui.position.left,
+          y: ui.position.top
         }
-      },
-      stop: () => {
       }
     }),
     $('.cubic-bezier > .control-area > .p2').draggable({
       containment: 'parent',
-      start: () => {
-      },
       drag: (e, ui) => {
-        this.position = {
-          p2_x: ui.position.left,
-          p2_y: ui.position.top,
-          p1_x: this.position.p1_x,
-          p1_y: this.position.p1_y,
+        this.p2 = {
+          x: ui.position.left,
+          y: ui.position.top
         }
-      },
-      stop: () => {
       }
     })    
   }
@@ -110,34 +115,37 @@ export default {
   align-contetn center
   justify-content center
   .control-area
-    width 210px
+    width 200px
     height 600px
     position relative
-    .p1,.p2
+    .p1
+    .p2
       position absolute
       width 16px
       height 16px
       background #A623B8
       border-radius 50%
       margin-top -8px
-      margin-left -3px 
+      margin-left -8px 
       cursor move
       box-shadow 0 0 0 0 rgba(166, 35, 184, 0.0)
       transition box-shadow 0.2s cubic-bezier(0.4, 0.4, 0, 1)
       &:hover
         box-shadow 0 0 0 4px rgba(166, 35, 184, 0.2)
     svg
-      width 210px
+      width 200px
       height 600px
+      overflow visible
       .line
         stroke #000000
         stroke-width 2px
-        fill: rgba(124,240,10,0.5)
-        d: path('M 0,400 L 200, 200')
-        stroke-opacity: 0.104761096
+        fill rgba(124,240,10,0.5)
+        d path('M 0,400 L 200, 200')
+        stroke-opacity 0.104761096
         stroke-linecap round
         stroke-linejoin round
-      .toP1,.toP2
+      .toP1
+      .toP2
         stroke-width 2px
         stroke #A623B8
         fill none
@@ -149,8 +157,4 @@ export default {
         stroke-linejoin round
         stroke #000000
         fill none
-
-
-
-
 </style>
